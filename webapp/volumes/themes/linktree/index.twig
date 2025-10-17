@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ meta.title }}</title>
+    <link rel="stylesheet" href="{{ theme_url }}/style.css">
+</head>
+<body>
+    <div class="container">
+        {% if meta.profile_image %}
+            <img src="{{ meta.profile_image }}" alt="Profilbild" class="profile-img">
+        {% endif %}
+        
+        <h1>{{ meta.title }}</h1>
+        <p>{{ meta.description }}</p>
+        
+        <div class="links">
+            {% for link in meta.links %}
+                <a href="{{ link.url }}" class="link" target="_blank" rel="noopener noreferrer">{{ link.text }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  pico-cms:
+    build: .
+    container_name: pico-cms-python
+    volumes:
+      # Mount all content directories
+      - ./volumes/content:/app/volumes/content:ro
+      - ./volumes/themes:/app/volumes/themes:ro
+      - ./volumes/config:/app/volumes/config:ro
+      - ./volumes/assets:/app/volumes/assets:ro
+    environment:
+      - FLASK_ENV=production
+      - CONFIG_FILE=/app/volumes/config/config.yml
+      - CONTENT_DIR=/app/volumes/content
+      - THEMES_DIR=/app/volumes/themes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    labels:
+      # Traefik aktivieren
+      - "traefik.enable=true"
+      
+      # HTTP Router (wird zu HTTPS umgeleitet)
+      - "traefik.http.routers.pypico-http.rule=Host(`pypico.t71.ch`)"
+      - "traefik.http.routers.pypico-http.entrypoints=web"
+      - "traefik.http.routers.pypico-http.middlewares=redirect-to-https"
+      
+      # HTTPS Router
+      - "traefik.http.routers.pypico.rule=Host(`pypico.t71.ch`)"
+      - "traefik.http.routers.pypico.entrypoints=websecure"
+      - "traefik.http.routers.pypico.tls=true"
+      - "traefik.http.routers.pypico.tls.certresolver=letsencrypt"
+      
+      # Service Definition
+      - "traefik.http.services.pypico.loadbalancer.server.port=5000"
+      
+      # Middleware für HTTPS Redirect
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

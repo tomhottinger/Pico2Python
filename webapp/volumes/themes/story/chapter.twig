@@ -1,0 +1,21 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <article class="chapter">
+        <h1>{{ meta.title }}</h1>
+        
+        <div class="chapter-content">
+            {{ content }}
+        </div>
+        
+        <nav class="chapter-navigation">
+            {% if prev_page %}
+                <a href="{{ prev_page.url }}" class="prev">← Vorheriges Kapitel</a>
+            {% endif %}
+            
+            {% if next_page %}
+                <a href="{{ next_page.url }}" class="next">Nächstes Kapitel →</a>
+            {% endif %}
+        </nav>
+    </article>
+{% endblock %}

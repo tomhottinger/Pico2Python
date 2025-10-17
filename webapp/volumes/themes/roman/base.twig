@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% if meta.title %}{{ meta.title }} | {% endif %}{{ site_title }}</title>
+    {% if meta.description %}
+        <meta name="description" content="{{ meta.description|striptags }}">
+    {% endif %}
+    {% if meta.robots %}
+        <meta name="robots" content="{{ meta.robots }}">
+    {% endif %}
+    
+    {# Stylesheets #}
+    <link rel="stylesheet" href="{{ theme_url }}/css/style.css" type="text/css" />
+    
+    {% if meta.custom_css %}
+        <style type="text/css">
+            {{ meta.custom_css }}
+        </style>
+    {% endif %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3Z69F1DG8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y3Z69F1DG8' { 'anonymize_ip': true });
+
+
+  
+</script>
+</head>
+<body>
+    <div class="container">
+      <header class="header">
+
+<nav class="nav">
+    <div class="nav-top">
+        <a href="{{ base_url }}" class="home-link">{{ site_title }}</a>
+        
+        <button class="burger-menu" aria-label="Menu">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </button>
+    </div>
+
+    <div class="menu-container">
+        <ul class="main-menu">
+            {% for page in pages if page.title %}
+            <li class="menu-item{% if page.id == current_page.id %} active{% endif %}">
+                <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        
+        {% if meta.previous_chapter or meta.next_chapter %}
+        <div class="chapter-nav">
+            {% if meta.previous_chapter %}
+                <a href="{{ meta.previous_chapter.url }}" class="prev-chapter">← Vorheriges Kapitel</a>
+            {% endif %}
+            {% if meta.next_chapter %}
+                <a href="{{ meta.next_chapter.url }}" class="next-chapter">Nächstes Kapitel →</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</nav>
+
+		  
+        </header>
+
+        <main class="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <p>
+                &copy; {{ "now"|date("Y") }} {{ meta.author ?? site_title }}
+                {% if meta.license %}
+                    | {{ meta.license }}
+                {% endif %}
+            </p>
+        </footer>
+    </div>
+
+    {% if meta.custom_js %}
+        <script type="text/javascript">
+            {{ meta.custom_js }}
+        </script>
+	{% endif %}
+	<script src="{{ theme_url }}/js/menu.js"></script>
+</body>
+</html>
