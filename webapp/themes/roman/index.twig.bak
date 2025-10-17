@@ -1,0 +1,32 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <div class="novel-container">
+        <header class="novel-header">
+            <h1>{{ meta.title }}</h1>
+            {% if meta.description %}
+                <div class="novel-description">{{ meta.description }}</div>
+            {% endif %}
+        </header>
+
+        <main class="novel-content">
+            {{ content }}
+            
+            {% if meta.chapters %}
+                <div class="chapter-list">
+                    <h2>Kapitel</h2>
+                    <ul>
+                    {% for chapter in meta.chapters %}
+                        <li>
+                            <a href="{{ chapter.url }}">{{ chapter.title }}</a>
+                            {% if chapter.date %}
+                                <span class="chapter-date">{{ chapter.date|date("d.m.Y") }}</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </main>
+    </div>
+{% endblock %}

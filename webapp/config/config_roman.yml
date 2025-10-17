@@ -1,0 +1,29 @@
+##
+# Basic
+#
+site_title: Noah's Exodus
+base_url: /
+debug: false
+timezone: Europe/Zurich
+locale: de_CH
+
+##
+# Theme
+#
+theme: roman
+theme_config:
+    widescreen: false
+
+##
+# Content
+#
+date_format: "%d.%m.%Y %H:%M"
+pages_order_by_meta: author
+pages_order_by: alpha
+pages_order: asc
+content_ext: .md
+
+##
+# Custom
+#
+my_custom_setting: Hello World!

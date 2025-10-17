@@ -1,0 +1,39 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<article class="chapter">
+    <h1>{{ meta.title|default(title) }}</h1>
+    
+    <nav class="chapter-nav-top">
+        {% if prev_page %}
+            <a href="{{ prev_page.url }}" class="chapter-link chapter-link-prev">
+                ← {{ prev_page.title }}
+            </a>
+        {% endif %}
+        
+        {% if next_page %}
+            <a href="{{ next_page.url }}" class="chapter-link chapter-link-next">
+                {{ next_page.title }} →
+            </a>
+        {% endif %}
+    </nav>
+    
+    <div class="chapter-content">
+        {{ content|safe }}
+    </div>
+    
+    <nav class="chapter-nav-bottom">
+        {% if prev_page %}
+            <a href="{{ prev_page.url }}" class="chapter-link chapter-link-prev">
+                ← {{ prev_page.title }}
+            </a>
+        {% endif %}
+        
+        {% if next_page %}
+            <a href="{{ next_page.url }}" class="chapter-link chapter-link-next">
+                {{ next_page.title }} →
+            </a>
+        {% endif %}
+    </nav>
+</article>
+{% endblock %}

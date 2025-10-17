@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<article class="biography">
+    <h1>{{ meta.title }}</h1>
+
+    {% if meta.image %}
+    <div class="biography-image">
+        <img src="{{ meta.image }}" alt="{{ meta.image_alt|default(meta.title) }}">
+        {% if meta.image_caption %}
+        <figcaption>{{ meta.image_caption }}</figcaption>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="biography-content">
+        {{ content }}
+    </div>
+</article>
+{% endblock %}
