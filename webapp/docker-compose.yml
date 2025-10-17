@@ -1,15 +1,13 @@
-version: '3.8'
-
 services:
-  pico-cms:
+  pico2python:
     build: .
     container_name: pico-cms-python
     volumes:
       # Mount all content directories
-      - ./volumes/content:/app/volumes/content:ro
-      - ./volumes/themes:/app/volumes/themes:ro
-      - ./volumes/config:/app/volumes/config:ro
-      - ./volumes/assets:/app/volumes/assets:ro
+      - ./volumes/content:/app/volumes/content
+      - ./volumes/themes:/app/volumes/themes
+      - ./volumes/config:/app/volumes/config
+      - ./volumes/assets:/app/volumes/assets
     environment:
       - FLASK_ENV=production
       - CONFIG_FILE=/app/volumes/config/config.yml
@@ -17,7 +15,7 @@ services:
       - THEMES_DIR=/app/volumes/themes
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s
       timeout: 3s
       retries: 3

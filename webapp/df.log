@@ -1,0 +1,50 @@
+pico-cms-python  | [2025-10-17 11:51:53 +0000] [1] [INFO] Starting gunicorn 21.2.0
+pico-cms-python  | [2025-10-17 11:51:53 +0000] [1] [INFO] Listening at: http://0.0.0.0:5000 (1)
+pico-cms-python  | [2025-10-17 11:51:53 +0000] [1] [INFO] Using worker: gthread
+pico-cms-python  | [2025-10-17 11:51:53 +0000] [7] [INFO] Booting worker with pid: 7
+pico-cms-python  | [2025-10-17 11:51:53 +0000] [8] [INFO] Booting worker with pid: 8
+pico-cms-python  | [2025-10-17 11:51:53 +0000] [9] [INFO] Booting worker with pid: 9
+pico-cms-python  | [2025-10-17 11:51:53 +0000] [10] [INFO] Booting worker with pid: 10
+pico-cms-python  | [2025-10-17 11:51:54 +0000] [9] [ERROR] Exception in worker process
+pico-cms-python  | Traceback (most recent call last):
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
+pico-cms-python  |     worker.init_process()
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/workers/gthread.py", line 95, in init_process
+pico-cms-python  |     super().init_process()
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py", line 134, in init_process
+pico-cms-python  |     self.load_wsgi()
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
+pico-cms-python  |     self.wsgi = self.app.wsgi()
+pico-cms-python  |                 ^^^^^^^^^^^^^^^
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/app/base.py", line 67, in wsgi
+pico-cms-python  |     self.callable = self.load()
+pico-cms-python  |                     ^^^^^^^^^^^
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
+pico-cms-python  |     return self.load_wsgiapp()
+pico-cms-python  |            ^^^^^^^^^^^^^^^^^^^
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
+pico-cms-python  |     return util.import_app(self.app_uri)
+pico-cms-python  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/gunicorn/util.py", line 371, in import_app
+pico-cms-python  |     mod = importlib.import_module(module)
+pico-cms-python  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pico-cms-python  |   File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+pico-cms-python  |     return _bootstrap._gcd_import(name[level:], package, level)
+pico-cms-python  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pico-cms-python  |   File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+pico-cms-python  |   File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+pico-cms-python  |   File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+pico-cms-python  |   File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+pico-cms-python  |   File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+pico-cms-python  |   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+pico-cms-python  |   File "/app/app.py", line 204, in <module>
+pico-cms-python  |     config = PicoConfig(CONFIG_FILE)
+pico-cms-python  |              ^^^^^^^^^^^^^^^^^^^^^^^
+pico-cms-python  |   File "/app/app.py", line 30, in __init__
+pico-cms-python  |     self.config = self._load_config(config_path)
+pico-cms-python  |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pico-cms-python  |   File "/app/app.py", line 36, in _load_config
+pico-cms-python  |     return yaml.safe_load(f) or {}
+pico-cms-python  |            ^^^^^^^^^^^^^^^^^
+pico-cms-python  |   File "/usr/local/lib/python3.11/site-packages/yaml/__init__.py", line 125, in safe_load
+pico-cms-python  |     return load(stream, SafeLoader)

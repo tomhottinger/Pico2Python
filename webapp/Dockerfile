@@ -18,10 +18,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 
 # Create volume directories
-RUN mkdir -p /app/volumes/content \
-    /app/volumes/themes \
-    /app/volumes/config \
-    /app/volumes/assets
 
 # Set environment variables
 ENV FLASK_APP=app.py
@@ -39,3 +35,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 
 # Run with gunicorn
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "4", "--threads", "2", "--timeout", "60", "--access-logfile", "-", "--error-logfile", "-", "app:app"]
+
