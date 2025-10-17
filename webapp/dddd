@@ -1,9 +1,0 @@
-# Zeige die Zeilen um beide Initialisierungen herum
-echo "=== Erste Initialisierung (um Zeile 260-280) ==="
-sed -n '260,280p' webapp/app.py
-
-echo "=== Zweite Initialisierung (um Zeile 585-605) ==="
-sed -n '585,605p' webapp/app.py
-
-# Oder besser: Suchen nach "Initialize configuration"
-grep -n "Initialize configuration" webapp/app.pyvi ddd	

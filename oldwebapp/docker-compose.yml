@@ -13,17 +13,25 @@ services:
       - CONTENT_DIR=/app/volumes/content
       - THEMES_DIR=/app/volumes/themes
     restart: unless-stopped
-    # healthcheck: ENTFERNEN - wird aus Dockerfile verwendet
     labels:
+      # Traefik aktivieren
       - "traefik.enable=true"
+      
+      # HTTP Router (redirect to HTTPS)
       - "traefik.http.routers.pypico-http.rule=Host(`pypico.t71.ch`)"
       - "traefik.http.routers.pypico-http.entrypoints=web"
       - "traefik.http.routers.pypico-http.middlewares=redirect-to-https"
+      
+      # HTTPS Router
       - "traefik.http.routers.pypico.rule=Host(`pypico.t71.ch`)"
       - "traefik.http.routers.pypico.entrypoints=websecure"
       - "traefik.http.routers.pypico.tls=true"
       - "traefik.http.routers.pypico.tls.certresolver=letsencrypt"
+      
+      # Service Configuration
       - "traefik.http.services.pypico.loadbalancer.server.port=5000"
+      
+      # Middleware
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
     networks:
