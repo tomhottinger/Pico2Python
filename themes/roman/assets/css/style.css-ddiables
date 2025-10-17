@@ -1,0 +1,129 @@
+/* Kapitel-Container */
+.chapter {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Kapitel-Titel */
+.chapter h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Obere Navigation */
+.chapter-nav-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 0.5rem 0 2rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.chapter-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.chapter-link:hover {
+    text-decoration: underline;
+}
+
+.chapter-link-prev {
+    text-align: left;
+}
+
+.chapter-link-next {
+    text-align: right;
+}
+
+/* Kapitel-Inhalt */
+.chapter-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin: 2rem 0;
+}
+
+.chapter-content p {
+    margin-bottom: 1.5rem;
+}
+
+.chapter-content p:first-of-type::first-letter {
+    float: left;
+    font-size: 3.5rem;
+    padding: 0.1em 0.1em 0 0;
+    line-height: 0.7;
+}
+
+/* Untere Navigation */
+.chapter-nav-bottom {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+}
+
+.prev-chapter,
+.next-chapter {
+    font-size: 1rem;
+}
+
+.prev-chapter a,
+.next-chapter a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.prev-chapter a:hover,
+.next-chapter a:hover {
+    background-color: var(--border-color);
+    text-decoration: none;
+}
+
+/* Druckversion */
+@media print {
+    .chapter-nav-top,
+    .chapter-nav-bottom {
+        display: none;
+    }
+    
+    .chapter {
+        padding: 0;
+    }
+    
+    .chapter-content {
+        font-size: 12pt;
+        line-height: 1.5;
+    }
+}
+
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+    .chapter {
+        padding: 1rem;
+    }
+    
+    .chapter h1 {
+        font-size: 1.75rem;
+    }
+    
+    .chapter-content {
+        font-size: 1.1rem;
+    }
+    
+    .chapter-nav-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+        text-align: center;
+    }
+}

@@ -1,0 +1,73 @@
+/* Basis-Styling */
+:root {
+    --text-color: #2c3e50;
+    --bg-color: #fff;
+    --link-color: #3498db;
+    --max-width: 45rem;
+    --font-serif: Georgia, serif;
+}
+
+body {
+    font-family: var(--font-serif);
+    line-height: 1.7;
+    color: var(--text-color);
+    background: var(--bg-color);
+    font-size: 1.125rem;
+}
+
+.novel-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Kapitel-Styling */
+.chapter-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.chapter-navigation {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Kapitel-Liste auf der Startseite */
+.chapter-list {
+    margin-top: 3rem;
+}
+
+.chapter-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.chapter-list li {
+    margin: 1rem 0;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.chapter-date {
+    color: #666;
+    font-size: 0.9rem;
+    margin-left: 1rem;
+}
+
+/* Responsives Design */
+@media (max-width: 768px) {
+    body {
+        font-size: 1rem;
+    }
+    
+    .novel-container {
+        padding: 1rem;
+    }
+    
+    .chapter-content {
+        font-size: 1.1rem;
+    }
+}

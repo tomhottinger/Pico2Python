@@ -1,0 +1,63 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<article class="chapter">
+    <h1>{{ meta.title }}</h1>
+    
+    <nav class="chapter-nav-top">
+        {% if pages[pages|length - 1].id != current_page.id %}
+            {% for page in pages|reverse %}
+                {% if page.id == current_page.id %}
+                    {% set prev_page = pages|reverse|slice(loop.index0 + 1, 1)|first %}
+                    {% if prev_page %}
+                        <a href="{{ prev_page.url }}" class="chapter-link chapter-link-prev">← {{ prev_page.title }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if pages[0].id != current_page.id %}
+            {% for page in pages %}
+                {% if page.id == current_page.id %}
+                    {% set next_page = pages|slice(loop.index0 + 1, 1)|first %}
+                    {% if next_page %}
+                        <a href="{{ next_page.url }}" class="chapter-link chapter-link-next">{{ next_page.title }} →</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </nav>
+    
+    <div class="chapter-content">
+        {{ content }}
+    </div>
+    
+    <nav class="chapter-nav-bottom">
+        {% if pages[pages|length - 1].id != current_page.id %}
+            {% for page in pages|reverse %}
+                {% if page.id == current_page.id %}
+                    {% set prev_page = pages|reverse|slice(loop.index0 + 1, 1)|first %}
+                    {% if prev_page %}
+                        <div class="prev-chapter">
+                            <a href="{{ prev_page.url }}">← Vorheriges Kapitel</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if pages[0].id != current_page.id %}
+            {% for page in pages %}
+                {% if page.id == current_page.id %}
+                    {% set next_page = pages|slice(loop.index0 + 1, 1)|first %}
+                    {% if next_page %}
+                        <div class="next-chapter">
+                            <a href="{{ next_page.url }}">Nächstes Kapitel →</a>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </nav>
+</article>
+{% endblock %}
