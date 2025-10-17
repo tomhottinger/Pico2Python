@@ -48,7 +48,30 @@ Das Script kopiert automatisch:
 
 **Wichtig:** Das Script benennt `.twig` Dateien automatisch in `.html` um!
 
-### 2. Manuelle Einrichtung
+### 2. Traefik Setup (HTTPS)
+
+Diese Anwendung ist für **Traefik** als Reverse Proxy konfiguriert:
+
+**Voraussetzungen:**
+- Traefik läuft bereits
+- Netzwerk `proxy` existiert
+- Certificate Resolver `letsencrypt` ist konfiguriert
+
+**Domain:** `pypico.t71.ch`
+
+Die `docker-compose.yml` enthält bereits alle notwendigen Traefik-Labels:
+- Automatische HTTPS-Umleitung
+- Let's Encrypt Zertifikate
+- Verbindung zum `proxy` Netzwerk
+
+**Traefik-Labels:**
+```yaml
+- "traefik.http.routers.pypico.rule=Host(`pypico.t71.ch`)"
+- "traefik.http.routers.pypico.entrypoints=websecure"
+- "traefik.http.routers.pypico.tls.certresolver=letsencrypt"
+```
+
+### 3. Manuelle Einrichtung
 
 Falls du von Grund auf startest:
 
@@ -78,8 +101,8 @@ docker-compose up -d --build
 
 ### 4. Zugriff
 
-- **Mit Nginx:** http://localhost
-- **Direkt Flask:** http://localhost:5000
+- **HTTPS (via Traefik):** https://pypico.t71.ch
+- **Direkt (nur für Debugging):** http://localhost:5000 (Port muss in docker-compose.yml freigeschaltet werden)
 
 ## Template-Migration (Twig → Jinja2)
 
@@ -211,13 +234,25 @@ python app.py
 
 ## Production Deployment
 
-### Mit Docker Compose (empfohlen)
+### Mit Traefik (empfohlen)
+
+Die Konfiguration ist bereits für Traefik optimiert:
 
 ```bash
-docker-compose up -d
+# Sicherstellen, dass proxy Netzwerk existiert
+docker network create proxy 2>/dev/null || true
+
+# Container starten
+docker-compose up -d --build
 ```
 
-### Nur Flask Container
+**Traefik übernimmt:**
+- ✅ HTTPS/SSL (Let's Encrypt)
+- ✅ HTTP → HTTPS Redirect
+- ✅ Reverse Proxy
+- ✅ Load Balancing
+
+### Nur Flask Container (ohne Traefik)
 
 ```bash
 docker build -t pico-cms .
